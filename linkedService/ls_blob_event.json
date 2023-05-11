@@ -1,0 +1,12 @@
+{
+	"name": "ls_blob_event",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": "DefaultEndpointsProtocol=https;AccountName=trainingdemoit;EndpointSuffix=core.windows.net;",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDJBOTFDMjExLTAzNjItNEVBNy05OEE2LUI2MzY3RUM2MTQ5QV8wYzI2NjQ0ZS1hMGY5LTQ1ZTEtOGE3MS1hY2FjZTA1ZjQyN2EiDQp9"
+		}
+	}
+}

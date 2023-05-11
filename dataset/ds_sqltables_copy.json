@@ -1,0 +1,13 @@
+{
+	"name": "ds_sqltables_copy",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sqldb_copy",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

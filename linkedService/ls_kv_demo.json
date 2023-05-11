@@ -1,0 +1,19 @@
+{
+	"name": "ls_kv_demo",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=adf-sqlserver-demo.database.windows.net;Initial Catalog=ADF_SQLDB;User ID=admindemo",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ls_kv_adf_demo",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "sec-sqldb-demo"
+			}
+		}
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"name": "ADF-PURU-DEMO",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "c97b83a7-3225-4b58-a9e4-755cf38d776a",
+		"tenantId": "40678528-f867-46a2-83c5-1f7ee70366c4"
+	}
+}

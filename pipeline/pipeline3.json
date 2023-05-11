@@ -1,0 +1,47 @@
+{
+	"name": "pipeline3",
+	"properties": {
+		"activities": [
+			{
+				"name": "Wait1",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 10
+				}
+			},
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Wait1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-03.southindia.logic.azure.com:443/workflows/0cf37336f1064254bc81f10a4352a4bc/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Et--U-rBmxIDtrOr6frqVN4W0grMRqSmdk9aPqtmydk",
+					"method": "POST",
+					"body": {
+						"value": "{\n\"Pipeline Name\":'@{pipeline().Pipeline}',\n\"Data factory name\" : '@{pipeline().DataFactory}',\n\"Runtime\" : '@{utcnow()},'\n}",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-04-27T04:44:57Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

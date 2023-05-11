@@ -1,0 +1,51 @@
+{
+	"name": "df_condition",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_blob_dmf",
+						"type": "DatasetReference"
+					},
+					"name": "Emp"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_emp_output",
+						"type": "DatasetReference"
+					},
+					"name": "Outputblob"
+				}
+			],
+			"transformations": [
+				{
+					"name": "EmpSplit"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Empid as integer,",
+				"          Name as string,",
+				"          Salary as integer,",
+				"          Deptno as integer,",
+				"          bonus as integer,",
+				"          country as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     preferredIntegralType: 'integer') ~> Emp",
+				"Emp split(Salary<5000,",
+				"     disjoint: false) ~> EmpSplit@(empsal5000, empsalrest)",
+				"EmpSplit@empsal5000 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> Outputblob"
+			]
+		}
+	}
+}
