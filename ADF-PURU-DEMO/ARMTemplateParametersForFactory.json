@@ -1,0 +1,69 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "ADF-PURU-DEMO"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=adf-sqlserver-demo.database.windows.net;Initial Catalog=ADF_SQLDB;User ID=admindemo"
+		},
+		"lsAzureBlobStorage_connectionString": {
+			"value": ""
+		},
+		"ls_blob_event_connectionString": {
+			"value": ""
+		},
+		"ls_blob_event_trigger_connectionString": {
+			"value": ""
+		},
+		"ls_blobstorage_connectionString": {
+			"value": ""
+		},
+		"ls_dmf_blob_connectionString": {
+			"value": ""
+		},
+		"ls_emp_demo_connectionString": {
+			"value": ""
+		},
+		"ls_event_connectionString": {
+			"value": ""
+		},
+		"ls_json_blob_connectionString": {
+			"value": ""
+		},
+		"ls_kv_demo_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=adf-sqlserver-demo.database.windows.net;Initial Catalog=ADF_SQLDB;User ID=admindemo"
+		},
+		"ls_sqldb_connectionString": {
+			"value": ""
+		},
+		"ls_sqldb_copy_connectionString": {
+			"value": ""
+		},
+		"ls_sqldb_kv_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=adf-sqlserver-demo.database.windows.net;Initial Catalog=ADF_SQLDB;User ID=admindemo"
+		},
+		"ls_sqldb_param_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=adf-sqlserver-demo.database.windows.net;Initial Catalog=ADF_SQLDB;User ID=@{linkedService().user_name};Password=@{linkedService().password}"
+		},
+		"lshremp_connectionString": {
+			"value": ""
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://kv-demo-it.vault.azure.net/"
+		},
+		"kv_sqldb_demo_properties_typeProperties_baseUrl": {
+			"value": "https://kv-adf-demo1.vault.azure.net/"
+		},
+		"ls_kv_adf_demo_properties_typeProperties_baseUrl": {
+			"value": "https://kv-demo-adf.vault.azure.net/"
+		},
+		"trig_event_demo_properties_pl_event_trigger_parameters_Filename": {
+			"value": "@triggerbody().filename"
+		},
+		"trig_event_demo_properties_typeProperties_scope": {
+			"value": "/subscriptions/8d3efd2d-0f51-4602-8ff1-e86fe93ed3b0/resourceGroups/Demo/providers/Microsoft.Storage/storageAccounts/trainingdemoit"
+		}
+	}
+}
