@@ -217,7 +217,12 @@
 						"name": "Wait1",
 						"type": "Wait",
 						"dependsOn": [],
-						"userProperties": [],
+						"userProperties": [
+							{
+								"name": "Wait rule",
+								"value": "wait for 10 sec to check the arrival of data"
+							}
+						],
 						"typeProperties": {
 							"waitTimeInSeconds": 10
 						}
