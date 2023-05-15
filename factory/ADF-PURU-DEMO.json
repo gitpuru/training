@@ -5,6 +5,10 @@
 			"Pipeline success Email": {
 				"type": "string",
 				"value": "success@gmail.com"
+			},
+			"devstorage": {
+				"type": "string",
+				"value": "devsorage.windows.net"
 			}
 		}
 	},
