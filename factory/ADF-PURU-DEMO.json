@@ -1,21 +1,5 @@
 {
 	"name": "ADF-PURU-DEMO",
-	"properties": {
-		"globalParameters": {
-			"Pipeline success Email": {
-				"type": "string",
-				"value": "success@gmail.com"
-			},
-			"devstorage": {
-				"type": "string",
-				"value": "devsorage.windows.net"
-			},
-			"uatstorage": {
-				"type": "string",
-				"value": "uatstorge.windows.net"
-			}
-		}
-	},
 	"location": "eastus",
 	"identity": {
 		"type": "SystemAssigned",
