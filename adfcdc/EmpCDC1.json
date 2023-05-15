@@ -192,6 +192,28 @@
 								{
 									"name": "inferDriftedColumnTypes",
 									"value": false
+								},
+								{
+									"name": "keys",
+									"value": [
+										"id"
+									]
+								},
+								{
+									"name": "deletable",
+									"value": true
+								},
+								{
+									"name": "updateable",
+									"value": true
+								},
+								{
+									"name": "upsertable",
+									"value": true
+								},
+								{
+									"name": "defaultToUpsert",
+									"value": true
 								}
 							]
 						}
@@ -319,6 +341,7 @@
 			},
 			"mode": "Microbatch"
 		},
+		"status": "Started",
 		"allowVNetOverride": false
 	}
 }
