@@ -1,5 +1,13 @@
 {
 	"name": "ADF-PURU-DEMO",
+	"properties": {
+		"globalParameters": {
+			"Pipeline success Email": {
+				"type": "string",
+				"value": "success@gmail.com"
+			}
+		}
+	},
 	"location": "eastus",
 	"identity": {
 		"type": "SystemAssigned",
