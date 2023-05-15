@@ -1,5 +1,13 @@
 {
 	"name": "ADF-PURU-DEMO",
+	"properties": {
+		"globalParameters": {
+			"success_email": {
+				"type": "string",
+				"value": "success@email.com"
+			}
+		}
+	},
 	"location": "eastus",
 	"identity": {
 		"type": "SystemAssigned",
