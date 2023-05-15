@@ -1,0 +1,33 @@
+{
+	"name": "ds_parquet_input",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_json_blob",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "emp_sample.parquet",
+				"container": "stage"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Name",
+				"type": "UTF8"
+			},
+			{
+				"name": "Salary",
+				"type": "UTF8"
+			}
+		]
+	}
+}
