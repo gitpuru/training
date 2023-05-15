@@ -59,12 +59,6 @@
 		"ls_kv_adf_demo_properties_typeProperties_baseUrl": {
 			"value": "https://kv-demo-adf.vault.azure.net/"
 		},
-		"trig_event_demo_properties_pl_event_trigger_parameters_Filename": {
-			"value": "@triggerbody().filename"
-		},
-		"trig_event_demo_properties_typeProperties_scope": {
-			"value": "/subscriptions/8d3efd2d-0f51-4602-8ff1-e86fe93ed3b0/resourceGroups/Demo/providers/Microsoft.Storage/storageAccounts/trainingdemoit"
-		},
 		"containerUri": {
 			"value": ""
 		},
