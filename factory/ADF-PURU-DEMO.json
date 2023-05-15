@@ -5,6 +5,10 @@
 			"success_email": {
 				"type": "string",
 				"value": "success@email.com"
+			},
+			"dev_storage": {
+				"type": "string",
+				"value": "devstorage.windows.net"
 			}
 		}
 	},
