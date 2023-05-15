@@ -28,6 +28,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_blobstorage'"
 		},
+		"ls_cdc_emp_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_cdc_emp'"
+		},
 		"ls_dmf_blob_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_dmf_blob'"
@@ -2613,6 +2617,19 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ls_cdc_emp')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('ls_cdc_emp_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ls_dmf_blob')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -3074,7 +3091,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Empcdc')]",
+			"name": "[concat(parameters('factoryName'), '/Cdcemployee')]",
 			"type": "Microsoft.DataFactory/factories/adfcdcs",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -3121,7 +3138,7 @@
 						],
 						"Connection": {
 							"linkedService": {
-								"referenceName": "ls_json_blob",
+								"referenceName": "ls_cdc_emp",
 								"type": "LinkedServiceReference"
 							},
 							"linkedServiceType": "AzureBlobStorage",
@@ -3338,7 +3355,7 @@
 								"targetEntityName": "dbo.emp",
 								"sourceEntityName": "cdc",
 								"sourceConnectionReference": {
-									"connectionName": "ls_json_blob",
+									"connectionName": "ls_cdc_emp",
 									"type": "linkedservicetype"
 								},
 								"attributeMappingInfo": {
@@ -3351,7 +3368,7 @@
 												"name": "id",
 												"entity": "cdc",
 												"entityConnectionReference": {
-													"connectionName": "ls_json_blob",
+													"connectionName": "ls_cdc_emp",
 													"type": "linkedservicetype"
 												}
 											}
@@ -3364,7 +3381,7 @@
 												"name": "name",
 												"entity": "cdc",
 												"entityConnectionReference": {
-													"connectionName": "ls_json_blob",
+													"connectionName": "ls_cdc_emp",
 													"type": "linkedservicetype"
 												}
 											}
@@ -3377,7 +3394,7 @@
 												"name": "salary",
 												"entity": "cdc",
 												"entityConnectionReference": {
-													"connectionName": "ls_json_blob",
+													"connectionName": "ls_cdc_emp",
 													"type": "linkedservicetype"
 												}
 											}
@@ -3392,14 +3409,14 @@
 				"Policy": {
 					"recurrence": {
 						"frequency": "Minute",
-						"interval": 1
+						"interval": 15
 					},
 					"mode": "Microbatch"
 				},
 				"allowVNetOverride": false
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_json_blob')]",
+				"[concat(variables('factoryId'), '/linkedServices/ls_cdc_emp')]",
 				"[concat(variables('factoryId'), '/linkedServices/ls_emp_demo')]"
 			]
 		}

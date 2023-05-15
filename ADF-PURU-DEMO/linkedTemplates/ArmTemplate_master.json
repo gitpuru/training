@@ -28,6 +28,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_blobstorage'"
 		},
+		"ls_cdc_emp_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_cdc_emp'"
+		},
 		"ls_dmf_blob_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_dmf_blob'"
@@ -121,6 +125,9 @@
 					},
 					"ls_blobstorage_connectionString": {
 						"value": "[parameters('ls_blobstorage_connectionString')]"
+					},
+					"ls_cdc_emp_connectionString": {
+						"value": "[parameters('ls_cdc_emp_connectionString')]"
 					},
 					"ls_dmf_blob_connectionString": {
 						"value": "[parameters('ls_dmf_blob_connectionString')]"
