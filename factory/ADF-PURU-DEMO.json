@@ -9,6 +9,10 @@
 			"dev_storage": {
 				"type": "string",
 				"value": "devstorage.windows.net"
+			},
+			"uat_storage": {
+				"type": "string",
+				"value": "uat_storage.windows.net"
 			}
 		}
 	},
