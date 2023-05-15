@@ -3074,7 +3074,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/EmpCDC')]",
+			"name": "[concat(parameters('factoryName'), '/EmpCDC1')]",
 			"type": "Microsoft.DataFactory/factories/adfcdcs",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -3095,7 +3095,7 @@
 										},
 										{
 											"name": "salary",
-											"dataType": "short"
+											"dataType": "integer"
 										}
 									],
 									"dslConnectorProperties": [
