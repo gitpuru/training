@@ -1,14 +1,14 @@
 {
-	"Pipeline success Email": {
+	"success_email": {
 		"type": "string",
-		"value": "success@gmail.com"
+		"value": "success@email.com"
 	},
-	"devstorage": {
+	"dev_storage": {
 		"type": "string",
-		"value": "devsorage.windows.net"
+		"value": "devstorage.windows.net"
 	},
-	"uatstorage": {
+	"uat_storage": {
 		"type": "string",
-		"value": "uatstorge.windows.net"
+		"value": "uat_storage.windows.net"
 	}
 }

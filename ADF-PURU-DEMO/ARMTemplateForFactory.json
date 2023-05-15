@@ -3074,7 +3074,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/adfcdc1')]",
+			"name": "[concat(parameters('factoryName'), '/EmpCDC')]",
 			"type": "Microsoft.DataFactory/factories/adfcdcs",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -3082,17 +3082,38 @@
 					{
 						"SourceEntities": [
 							{
-								"name": "input",
+								"name": "cdc",
 								"properties": {
-									"schema": [],
+									"schema": [
+										{
+											"name": "id",
+											"dataType": "short"
+										},
+										{
+											"name": "name",
+											"dataType": "string"
+										},
+										{
+											"name": "salary",
+											"dataType": "short"
+										}
+									],
 									"dslConnectorProperties": [
 										{
 											"name": "container",
-											"value": "input"
+											"value": "cdc"
 										},
 										{
 											"name": "fileSystem",
-											"value": "input"
+											"value": "cdc"
+										},
+										{
+											"name": "allowSchemaDrift",
+											"value": false
+										},
+										{
+											"name": "inferDriftedColumnTypes",
+											"value": false
 										}
 									]
 								}
@@ -3100,7 +3121,7 @@
 						],
 						"Connection": {
 							"linkedService": {
-								"referenceName": "ls_blob_event",
+								"referenceName": "ls_json_blob",
 								"type": "LinkedServiceReference"
 							},
 							"linkedServiceType": "AzureBlobStorage",
@@ -3216,17 +3237,38 @@
 					{
 						"TargetEntities": [
 							{
-								"name": "output",
+								"name": "dbo.emp",
 								"properties": {
-									"schema": [],
-									"dslConnectorProperties": [
+									"schema": [
 										{
-											"name": "container",
-											"value": "output"
+											"name": "id",
+											"dataType": "integer"
 										},
 										{
-											"name": "fileSystem",
-											"value": "output"
+											"name": "name",
+											"dataType": "string"
+										},
+										{
+											"name": "salary",
+											"dataType": "integer"
+										}
+									],
+									"dslConnectorProperties": [
+										{
+											"name": "schemaName",
+											"value": "dbo"
+										},
+										{
+											"name": "tableName",
+											"value": "emp"
+										},
+										{
+											"name": "allowSchemaDrift",
+											"value": false
+										},
+										{
+											"name": "inferDriftedColumnTypes",
+											"value": false
 										}
 									]
 								}
@@ -3234,10 +3276,10 @@
 						],
 						"Connection": {
 							"linkedService": {
-								"referenceName": "ls_blob_event",
+								"referenceName": "ls_emp_demo",
 								"type": "LinkedServiceReference"
 							},
-							"linkedServiceType": "AzureBlobStorage",
+							"linkedServiceType": "AzureSqlDatabase",
 							"type": "linkedservicetype",
 							"isInlineDataset": true,
 							"commonDslConnectorProperties": [
@@ -3251,36 +3293,96 @@
 								},
 								{
 									"name": "format",
-									"value": "delimited"
+									"value": "table"
 								},
 								{
-									"name": "columnNamesAsHeader",
+									"name": "store",
+									"value": "sqlserver"
+								},
+								{
+									"name": "databaseType",
+									"value": "databaseType"
+								},
+								{
+									"name": "database",
+									"value": "database"
+								},
+								{
+									"name": "deletable",
+									"value": false
+								},
+								{
+									"name": "insertable",
 									"value": true
 								},
 								{
-									"name": "columnDelimiter",
-									"value": ","
+									"name": "updateable",
+									"value": false
 								},
 								{
-									"name": "escapeChar",
-									"value": "\\\\"
+									"name": "upsertable",
+									"value": false
 								},
 								{
-									"name": "quoteChar",
-									"value": "\\\""
+									"name": "skipDuplicateMapInputs",
+									"value": true
+								},
+								{
+									"name": "skipDuplicateMapOutputs",
+									"value": true
 								}
 							]
 						},
 						"DataMapperMappings": [
 							{
-								"targetEntityName": "output",
-								"sourceEntityName": "input",
+								"targetEntityName": "dbo.emp",
+								"sourceEntityName": "cdc",
 								"sourceConnectionReference": {
-									"connectionName": "ls_blob_event",
+									"connectionName": "ls_json_blob",
 									"type": "linkedservicetype"
 								},
 								"attributeMappingInfo": {
-									"attributeMappings": []
+									"attributeMappings": [
+										{
+											"name": "id",
+											"type": "Direct",
+											"functionName": "",
+											"attributeReference": {
+												"name": "id",
+												"entity": "cdc",
+												"entityConnectionReference": {
+													"connectionName": "ls_json_blob",
+													"type": "linkedservicetype"
+												}
+											}
+										},
+										{
+											"name": "name",
+											"type": "Direct",
+											"functionName": "",
+											"attributeReference": {
+												"name": "name",
+												"entity": "cdc",
+												"entityConnectionReference": {
+													"connectionName": "ls_json_blob",
+													"type": "linkedservicetype"
+												}
+											}
+										},
+										{
+											"name": "salary",
+											"type": "Direct",
+											"functionName": "",
+											"attributeReference": {
+												"name": "salary",
+												"entity": "cdc",
+												"entityConnectionReference": {
+													"connectionName": "ls_json_blob",
+													"type": "linkedservicetype"
+												}
+											}
+										}
+									]
 								}
 							}
 						],
@@ -3294,11 +3396,11 @@
 					},
 					"mode": "Microbatch"
 				},
-				"status": "Stopped",
 				"allowVNetOverride": false
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_blob_event')]"
+				"[concat(variables('factoryId'), '/linkedServices/ls_json_blob')]",
+				"[concat(variables('factoryId'), '/linkedServices/ls_emp_demo')]"
 			]
 		}
 	]
