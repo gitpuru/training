@@ -372,683 +372,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/cdc1')]",
-			"type": "Microsoft.DataFactory/factories/adfcdcs",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"SourceConnectionsInfo": [
-					{
-						"SourceEntities": [
-							{
-								"name": "cdc",
-								"properties": {
-									"schema": [
-										{
-											"name": "id",
-											"dataType": "short"
-										},
-										{
-											"name": "name",
-											"dataType": "string"
-										},
-										{
-											"name": "salary",
-											"dataType": "short"
-										}
-									],
-									"dslConnectorProperties": [
-										{
-											"name": "container",
-											"value": "cdc"
-										},
-										{
-											"name": "fileSystem",
-											"value": "cdc"
-										},
-										{
-											"name": "allowSchemaDrift",
-											"value": false
-										},
-										{
-											"name": "inferDriftedColumnTypes",
-											"value": false
-										}
-									]
-								}
-							}
-						],
-						"Connection": {
-							"linkedService": {
-								"referenceName": "ls_cdc_test_blob",
-								"type": "LinkedServiceReference"
-							},
-							"linkedServiceType": "AzureBlobStorage",
-							"type": "linkedservicetype",
-							"isInlineDataset": true,
-							"commonDslConnectorProperties": [
-								{
-									"name": "allowSchemaDrift",
-									"value": true
-								},
-								{
-									"name": "inferDriftedColumnTypes",
-									"value": true
-								},
-								{
-									"name": "format",
-									"value": "delimited"
-								},
-								{
-									"name": "dateFormats",
-									"value": [
-										"MM/dd/yyyy",
-										"dd/MM/yyyy",
-										"yyyy/MM/dd",
-										"MM-dd-yyyy",
-										"dd-MM-yyyy",
-										"yyyy-MM-dd",
-										"dd.MM.yyyy",
-										"MM.dd.yyyy",
-										"yyyy.MM.dd"
-									]
-								},
-								{
-									"name": "timestampFormats",
-									"value": [
-										"yyyyMMddHHmm",
-										"yyyyMMdd HHmm",
-										"yyyyMMddHHmmss",
-										"yyyyMMdd HHmmss",
-										"dd-MM-yyyy HH:mm:ss",
-										"dd-MM-yyyy HH:mm",
-										"yyyy-M-d H:m:s",
-										"yyyy-MM-dd\\'T\\'HH:mm:ss\\'Z\\'",
-										"yyyy-M-d\\'T\\'H:m:s\\'Z\\'",
-										"yyyy-M-d\\'T\\'H:m:s",
-										"yyyy-MM-dd\\'T\\'HH:mm:ss",
-										"yyyy-MM-dd HH:mm:ss",
-										"yyyy-MM-dd HH:mm",
-										"yyyy.MM.dd HH:mm:ss",
-										"MM/dd/yyyy HH:mm:ss",
-										"M/d/yyyy H:m:s",
-										"yyyy/MM/dd HH:mm:ss",
-										"yyyy/M/d H:m:s",
-										"dd MMM yyyy HH:mm:ss",
-										"dd MMMM yyyy HH:mm:ss",
-										"d MMM yyyy H:m:s",
-										"d MMMM yyyy H:m:s",
-										"d-M-yyyy H:m:s",
-										"d-M-yyyy H:m",
-										"yyyy-M-d H:m",
-										"MM/dd/yyyy HH:mm",
-										"M/d/yyyy H:m",
-										"yyyy/MM/dd HH:mm",
-										"yyyy/M/d H:m",
-										"dd MMMM yyyy HH:mm",
-										"dd MMM yyyy HH:mm",
-										"d MMMM yyyy H:m",
-										"d MMM yyyy H:m",
-										"MM-dd-yyyy hh:mm:ss a",
-										"MM-dd-yyyy HH:mm:ss",
-										"MM/dd/yyyy hh:mm:ss a",
-										"yyyy.MM.dd hh:mm:ss a",
-										"MM/dd/yyyy",
-										"dd/MM/yyyy",
-										"yyyy/MM/dd",
-										"MM-dd-yyyy",
-										"dd-MM-yyyy",
-										"yyyy-MM-dd",
-										"dd.MM.yyyy",
-										"MM.dd.yyyy",
-										"yyyy.MM.dd"
-									]
-								},
-								{
-									"name": "enableCdc",
-									"value": true
-								},
-								{
-									"name": "skipInitialLoad",
-									"value": true
-								},
-								{
-									"name": "columnNamesAsHeader",
-									"value": true
-								},
-								{
-									"name": "columnDelimiter",
-									"value": ","
-								},
-								{
-									"name": "escapeChar",
-									"value": "\\\\"
-								},
-								{
-									"name": "quoteChar",
-									"value": "\\\""
-								}
-							]
-						}
-					}
-				],
-				"TargetConnectionsInfo": [
-					{
-						"TargetEntities": [
-							{
-								"name": "dbo.emp_cdc",
-								"properties": {
-									"schema": [
-										{
-											"name": "id",
-											"dataType": "integer"
-										},
-										{
-											"name": "name",
-											"dataType": "string"
-										},
-										{
-											"name": "salary",
-											"dataType": "integer"
-										}
-									],
-									"dslConnectorProperties": [
-										{
-											"name": "schemaName",
-											"value": "dbo"
-										},
-										{
-											"name": "tableName",
-											"value": "emp_cdc"
-										},
-										{
-											"name": "allowSchemaDrift",
-											"value": false
-										},
-										{
-											"name": "inferDriftedColumnTypes",
-											"value": false
-										}
-									]
-								}
-							}
-						],
-						"Connection": {
-							"linkedService": {
-								"referenceName": "ls_emp_demo",
-								"type": "LinkedServiceReference"
-							},
-							"linkedServiceType": "AzureSqlDatabase",
-							"type": "linkedservicetype",
-							"isInlineDataset": true,
-							"commonDslConnectorProperties": [
-								{
-									"name": "allowSchemaDrift",
-									"value": true
-								},
-								{
-									"name": "inferDriftedColumnTypes",
-									"value": true
-								},
-								{
-									"name": "format",
-									"value": "table"
-								},
-								{
-									"name": "store",
-									"value": "sqlserver"
-								},
-								{
-									"name": "databaseType",
-									"value": "databaseType"
-								},
-								{
-									"name": "database",
-									"value": "database"
-								},
-								{
-									"name": "deletable",
-									"value": false
-								},
-								{
-									"name": "insertable",
-									"value": true
-								},
-								{
-									"name": "updateable",
-									"value": false
-								},
-								{
-									"name": "upsertable",
-									"value": false
-								},
-								{
-									"name": "skipDuplicateMapInputs",
-									"value": true
-								},
-								{
-									"name": "skipDuplicateMapOutputs",
-									"value": true
-								}
-							]
-						},
-						"DataMapperMappings": [
-							{
-								"targetEntityName": "dbo.emp_cdc",
-								"sourceEntityName": "cdc",
-								"sourceConnectionReference": {
-									"connectionName": "ls_cdc_test_blob",
-									"type": "linkedservicetype"
-								},
-								"attributeMappingInfo": {
-									"attributeMappings": [
-										{
-											"name": "id",
-											"type": "Direct",
-											"functionName": "",
-											"attributeReference": {
-												"name": "id",
-												"entity": "cdc",
-												"entityConnectionReference": {
-													"connectionName": "ls_cdc_test_blob",
-													"type": "linkedservicetype"
-												}
-											}
-										},
-										{
-											"name": "name",
-											"type": "Direct",
-											"functionName": "",
-											"attributeReference": {
-												"name": "name",
-												"entity": "cdc",
-												"entityConnectionReference": {
-													"connectionName": "ls_cdc_test_blob",
-													"type": "linkedservicetype"
-												}
-											}
-										},
-										{
-											"name": "salary",
-											"type": "Direct",
-											"functionName": "",
-											"attributeReference": {
-												"name": "salary",
-												"entity": "cdc",
-												"entityConnectionReference": {
-													"connectionName": "ls_cdc_test_blob",
-													"type": "linkedservicetype"
-												}
-											}
-										}
-									]
-								}
-							}
-						],
-						"Relationships": []
-					}
-				],
-				"Policy": {
-					"recurrence": {
-						"frequency": "Minute",
-						"interval": 1
-					},
-					"mode": "Microbatch"
-				},
-				"status": "Started",
-				"allowVNetOverride": false
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/EmpChange')]",
-			"type": "Microsoft.DataFactory/factories/adfcdcs",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"SourceConnectionsInfo": [
-					{
-						"SourceEntities": [
-							{
-								"name": "cdc",
-								"properties": {
-									"schema": [
-										{
-											"name": "id",
-											"dataType": "short"
-										},
-										{
-											"name": "name",
-											"dataType": "string"
-										},
-										{
-											"name": "salary",
-											"dataType": "short"
-										}
-									],
-									"dslConnectorProperties": [
-										{
-											"name": "container",
-											"value": "cdc"
-										},
-										{
-											"name": "fileSystem",
-											"value": "cdc"
-										},
-										{
-											"name": "allowSchemaDrift",
-											"value": false
-										},
-										{
-											"name": "inferDriftedColumnTypes",
-											"value": false
-										}
-									]
-								}
-							}
-						],
-						"Connection": {
-							"linkedService": {
-								"referenceName": "ls_json_blob",
-								"type": "LinkedServiceReference"
-							},
-							"linkedServiceType": "AzureBlobStorage",
-							"type": "linkedservicetype",
-							"isInlineDataset": true,
-							"commonDslConnectorProperties": [
-								{
-									"name": "allowSchemaDrift",
-									"value": true
-								},
-								{
-									"name": "inferDriftedColumnTypes",
-									"value": true
-								},
-								{
-									"name": "format",
-									"value": "delimited"
-								},
-								{
-									"name": "dateFormats",
-									"value": [
-										"MM/dd/yyyy",
-										"dd/MM/yyyy",
-										"yyyy/MM/dd",
-										"MM-dd-yyyy",
-										"dd-MM-yyyy",
-										"yyyy-MM-dd",
-										"dd.MM.yyyy",
-										"MM.dd.yyyy",
-										"yyyy.MM.dd"
-									]
-								},
-								{
-									"name": "timestampFormats",
-									"value": [
-										"yyyyMMddHHmm",
-										"yyyyMMdd HHmm",
-										"yyyyMMddHHmmss",
-										"yyyyMMdd HHmmss",
-										"dd-MM-yyyy HH:mm:ss",
-										"dd-MM-yyyy HH:mm",
-										"yyyy-M-d H:m:s",
-										"yyyy-MM-dd\\'T\\'HH:mm:ss\\'Z\\'",
-										"yyyy-M-d\\'T\\'H:m:s\\'Z\\'",
-										"yyyy-M-d\\'T\\'H:m:s",
-										"yyyy-MM-dd\\'T\\'HH:mm:ss",
-										"yyyy-MM-dd HH:mm:ss",
-										"yyyy-MM-dd HH:mm",
-										"yyyy.MM.dd HH:mm:ss",
-										"MM/dd/yyyy HH:mm:ss",
-										"M/d/yyyy H:m:s",
-										"yyyy/MM/dd HH:mm:ss",
-										"yyyy/M/d H:m:s",
-										"dd MMM yyyy HH:mm:ss",
-										"dd MMMM yyyy HH:mm:ss",
-										"d MMM yyyy H:m:s",
-										"d MMMM yyyy H:m:s",
-										"d-M-yyyy H:m:s",
-										"d-M-yyyy H:m",
-										"yyyy-M-d H:m",
-										"MM/dd/yyyy HH:mm",
-										"M/d/yyyy H:m",
-										"yyyy/MM/dd HH:mm",
-										"yyyy/M/d H:m",
-										"dd MMMM yyyy HH:mm",
-										"dd MMM yyyy HH:mm",
-										"d MMMM yyyy H:m",
-										"d MMM yyyy H:m",
-										"MM-dd-yyyy hh:mm:ss a",
-										"MM-dd-yyyy HH:mm:ss",
-										"MM/dd/yyyy hh:mm:ss a",
-										"yyyy.MM.dd hh:mm:ss a",
-										"MM/dd/yyyy",
-										"dd/MM/yyyy",
-										"yyyy/MM/dd",
-										"MM-dd-yyyy",
-										"dd-MM-yyyy",
-										"yyyy-MM-dd",
-										"dd.MM.yyyy",
-										"MM.dd.yyyy",
-										"yyyy.MM.dd"
-									]
-								},
-								{
-									"name": "enableCdc",
-									"value": true
-								},
-								{
-									"name": "skipInitialLoad",
-									"value": true
-								},
-								{
-									"name": "columnNamesAsHeader",
-									"value": true
-								},
-								{
-									"name": "columnDelimiter",
-									"value": ","
-								},
-								{
-									"name": "escapeChar",
-									"value": "\\\\"
-								},
-								{
-									"name": "quoteChar",
-									"value": "\\\""
-								}
-							]
-						}
-					}
-				],
-				"TargetConnectionsInfo": [
-					{
-						"TargetEntities": [
-							{
-								"name": "dbo.emp_cdc",
-								"properties": {
-									"schema": [
-										{
-											"name": "id",
-											"dataType": "integer"
-										},
-										{
-											"name": "name",
-											"dataType": "string"
-										},
-										{
-											"name": "salary",
-											"dataType": "integer"
-										}
-									],
-									"dslConnectorProperties": [
-										{
-											"name": "schemaName",
-											"value": "dbo"
-										},
-										{
-											"name": "tableName",
-											"value": "emp_cdc"
-										},
-										{
-											"name": "allowSchemaDrift",
-											"value": false
-										},
-										{
-											"name": "inferDriftedColumnTypes",
-											"value": false
-										},
-										{
-											"name": "keys",
-											"value": [
-												"id"
-											]
-										},
-										{
-											"name": "deletable",
-											"value": true
-										},
-										{
-											"name": "updateable",
-											"value": true
-										},
-										{
-											"name": "upsertable",
-											"value": true
-										},
-										{
-											"name": "defaultToUpsert",
-											"value": true
-										}
-									]
-								}
-							}
-						],
-						"Connection": {
-							"linkedService": {
-								"referenceName": "ls_emp_demo",
-								"type": "LinkedServiceReference"
-							},
-							"linkedServiceType": "AzureSqlDatabase",
-							"type": "linkedservicetype",
-							"isInlineDataset": true,
-							"commonDslConnectorProperties": [
-								{
-									"name": "allowSchemaDrift",
-									"value": true
-								},
-								{
-									"name": "inferDriftedColumnTypes",
-									"value": true
-								},
-								{
-									"name": "format",
-									"value": "table"
-								},
-								{
-									"name": "store",
-									"value": "sqlserver"
-								},
-								{
-									"name": "databaseType",
-									"value": "databaseType"
-								},
-								{
-									"name": "database",
-									"value": "database"
-								},
-								{
-									"name": "deletable",
-									"value": false
-								},
-								{
-									"name": "insertable",
-									"value": true
-								},
-								{
-									"name": "updateable",
-									"value": false
-								},
-								{
-									"name": "upsertable",
-									"value": false
-								},
-								{
-									"name": "skipDuplicateMapInputs",
-									"value": true
-								},
-								{
-									"name": "skipDuplicateMapOutputs",
-									"value": true
-								}
-							]
-						},
-						"DataMapperMappings": [
-							{
-								"targetEntityName": "dbo.emp_cdc",
-								"sourceEntityName": "cdc",
-								"sourceConnectionReference": {
-									"connectionName": "ls_json_blob",
-									"type": "linkedservicetype"
-								},
-								"attributeMappingInfo": {
-									"attributeMappings": [
-										{
-											"name": "id",
-											"type": "Direct",
-											"functionName": "",
-											"attributeReference": {
-												"name": "id",
-												"entity": "cdc",
-												"entityConnectionReference": {
-													"connectionName": "ls_json_blob",
-													"type": "linkedservicetype"
-												}
-											}
-										},
-										{
-											"name": "name",
-											"type": "Direct",
-											"functionName": "",
-											"attributeReference": {
-												"name": "name",
-												"entity": "cdc",
-												"entityConnectionReference": {
-													"connectionName": "ls_json_blob",
-													"type": "linkedservicetype"
-												}
-											}
-										},
-										{
-											"name": "salary",
-											"type": "Direct",
-											"functionName": "",
-											"attributeReference": {
-												"name": "salary",
-												"entity": "cdc",
-												"entityConnectionReference": {
-													"connectionName": "ls_json_blob",
-													"type": "linkedservicetype"
-												}
-											}
-										}
-									]
-								}
-							}
-						],
-						"Relationships": []
-					}
-				],
-				"Policy": {
-					"recurrence": {
-						"frequency": "Minute",
-						"interval": 1
-					},
-					"mode": "Microbatch"
-				},
-				"allowVNetOverride": false
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/Cdcemployee')]",
 			"type": "Microsoft.DataFactory/factories/adfcdcs",
 			"apiVersion": "2018-06-01",
@@ -1371,6 +694,7 @@
 					},
 					"mode": "Microbatch"
 				},
+				"status": "Starting",
 				"allowVNetOverride": false
 			},
 			"dependsOn": []
@@ -1919,6 +1243,193 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2023-04-28T02:47:29Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_event')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "input_event",
+								"type": "DatasetReference",
+								"parameters": {
+									"filename": {
+										"value": "@pipeline().parameters.filename",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "output_event",
+								"type": "DatasetReference",
+								"parameters": {
+									"filename": {
+										"value": "@pipeline().parameters.filename",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2023-05-01T13:58:12Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/input_event')]",
+				"[concat(variables('factoryId'), '/datasets/output_event')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_event_trigger')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_input_event",
+								"type": "DatasetReference",
+								"parameters": {
+									"Filename": {
+										"value": "@pipeline().parameters.Filename",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_output_event_trig",
+								"type": "DatasetReference",
+								"parameters": {
+									"Filename": {
+										"value": "@pipeline().parameters.Filename",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"Filename": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2023-05-02T03:44:53Z"
 			},
 			"dependsOn": []
 		}
