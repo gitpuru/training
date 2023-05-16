@@ -535,9 +535,22 @@
 					{
 						"TargetEntities": [
 							{
-								"name": "dbo.emp",
+								"name": "dbo.emp_cdc",
 								"properties": {
-									"schema": [],
+									"schema": [
+										{
+											"name": "id",
+											"dataType": "integer"
+										},
+										{
+											"name": "name",
+											"dataType": "string"
+										},
+										{
+											"name": "salary",
+											"dataType": "integer"
+										}
+									],
 									"dslConnectorProperties": [
 										{
 											"name": "schemaName",
@@ -545,37 +558,15 @@
 										},
 										{
 											"name": "tableName",
-											"value": "emp"
-										},
-										{
-											"name": "keys",
-											"value": [
-												"id"
-											]
-										},
-										{
-											"name": "deletable",
-											"value": true
-										},
-										{
-											"name": "updateable",
-											"value": true
-										},
-										{
-											"name": "upsertable",
-											"value": true
-										},
-										{
-											"name": "defaultToUpsert",
-											"value": true
+											"value": "emp_cdc"
 										},
 										{
 											"name": "allowSchemaDrift",
-											"value": true
+											"value": false
 										},
 										{
 											"name": "inferDriftedColumnTypes",
-											"value": true
+											"value": false
 										}
 									]
 								}
@@ -642,7 +633,7 @@
 						},
 						"DataMapperMappings": [
 							{
-								"targetEntityName": "dbo.emp",
+								"targetEntityName": "dbo.emp_cdc",
 								"sourceEntityName": "cdc",
 								"sourceConnectionReference": {
 									"connectionName": "ls_cdc_test_blob",
