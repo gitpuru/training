@@ -23,6 +23,9 @@
 		"ls_cdc_emp_connectionString": {
 			"value": ""
 		},
+		"ls_cdc_test_blob_connectionString": {
+			"value": ""
+		},
 		"ls_dmf_blob_connectionString": {
 			"value": ""
 		},

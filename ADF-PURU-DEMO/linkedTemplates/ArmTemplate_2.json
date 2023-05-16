@@ -28,6 +28,42 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/ds_parquet_input')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_json_blob",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "emp_sample.parquet",
+						"container": "stage"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "ID",
+						"type": "UTF8"
+					},
+					{
+						"name": "Name",
+						"type": "UTF8"
+					},
+					{
+						"name": "Salary",
+						"type": "UTF8"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_sp_demo')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -336,7 +372,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Cdcemployee')]",
+			"name": "[concat(parameters('factoryName'), '/cdc1')]",
 			"type": "Microsoft.DataFactory/factories/adfcdcs",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -383,7 +419,7 @@
 						],
 						"Connection": {
 							"linkedService": {
-								"referenceName": "ls_cdc_emp",
+								"referenceName": "ls_cdc_test_blob",
 								"type": "LinkedServiceReference"
 							},
 							"linkedServiceType": "AzureBlobStorage",
@@ -531,6 +567,28 @@
 										{
 											"name": "inferDriftedColumnTypes",
 											"value": false
+										},
+										{
+											"name": "keys",
+											"value": [
+												"id"
+											]
+										},
+										{
+											"name": "deletable",
+											"value": true
+										},
+										{
+											"name": "updateable",
+											"value": true
+										},
+										{
+											"name": "upsertable",
+											"value": true
+										},
+										{
+											"name": "defaultToUpsert",
+											"value": true
 										}
 									]
 								}
@@ -600,7 +658,7 @@
 								"targetEntityName": "dbo.emp",
 								"sourceEntityName": "cdc",
 								"sourceConnectionReference": {
-									"connectionName": "ls_cdc_emp",
+									"connectionName": "ls_cdc_test_blob",
 									"type": "linkedservicetype"
 								},
 								"attributeMappingInfo": {
@@ -613,7 +671,7 @@
 												"name": "id",
 												"entity": "cdc",
 												"entityConnectionReference": {
-													"connectionName": "ls_cdc_emp",
+													"connectionName": "ls_cdc_test_blob",
 													"type": "linkedservicetype"
 												}
 											}
@@ -626,7 +684,7 @@
 												"name": "name",
 												"entity": "cdc",
 												"entityConnectionReference": {
-													"connectionName": "ls_cdc_emp",
+													"connectionName": "ls_cdc_test_blob",
 													"type": "linkedservicetype"
 												}
 											}
@@ -639,7 +697,7 @@
 												"name": "salary",
 												"entity": "cdc",
 												"entityConnectionReference": {
-													"connectionName": "ls_cdc_emp",
+													"connectionName": "ls_cdc_test_blob",
 													"type": "linkedservicetype"
 												}
 											}
@@ -654,7 +712,7 @@
 				"Policy": {
 					"recurrence": {
 						"frequency": "Minute",
-						"interval": 15
+						"interval": 1
 					},
 					"mode": "Microbatch"
 				},
@@ -1395,141 +1453,6 @@
 				"lastPublishTime": "2023-05-02T03:44:53Z"
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pl_sqldb_copy')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "List of tables",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"sqlReaderQuery": "select * from information_schema.tables\nwhere table_type='BASE TABLE'",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"dataset": {
-								"referenceName": "ds_sqltables_copy",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"firstRowOnly": false
-						}
-					},
-					{
-						"name": "ForEach SQL table",
-						"type": "ForEach",
-						"dependsOn": [
-							{
-								"activity": "List of tables",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@activity('List of tables').output.value",
-								"type": "Expression"
-							},
-							"activities": [
-								{
-									"name": "Export the data",
-									"type": "Copy",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "AzureSqlSource",
-											"queryTimeout": "02:00:00",
-											"partitionOption": "None"
-										},
-										"sink": {
-											"type": "DelimitedTextSink",
-											"storeSettings": {
-												"type": "AzureBlobStorageWriteSettings"
-											},
-											"formatSettings": {
-												"type": "DelimitedTextWriteSettings",
-												"quoteAllText": true,
-												"fileExtension": ".txt"
-											}
-										},
-										"enableStaging": false,
-										"translator": {
-											"type": "TabularTranslator",
-											"typeConversion": true,
-											"typeConversionSettings": {
-												"allowDataTruncation": true,
-												"treatBooleanAsNumber": false
-											}
-										}
-									},
-									"inputs": [
-										{
-											"referenceName": "ds_export_tables",
-											"type": "DatasetReference",
-											"parameters": {
-												"schemaname": {
-													"value": "@item().table_schema",
-													"type": "Expression"
-												},
-												"tablename": {
-													"value": "@item().table_name",
-													"type": "Expression"
-												}
-											}
-										}
-									],
-									"outputs": [
-										{
-											"referenceName": "ls_export_blob",
-											"type": "DatasetReference",
-											"parameters": {
-												"filename": {
-													"value": "@concat(item().table_schema,'_',item().table_name,'.csv')",
-													"type": "Expression"
-												}
-											}
-										}
-									]
-								}
-							]
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2023-04-24T02:59:26Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ds_sqltables_copy')]",
-				"[concat(variables('factoryId'), '/datasets/ls_export_blob')]"
-			]
 		}
 	]
 }
