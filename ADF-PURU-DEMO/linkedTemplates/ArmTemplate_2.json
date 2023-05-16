@@ -537,20 +537,7 @@
 							{
 								"name": "dbo.emp",
 								"properties": {
-									"schema": [
-										{
-											"name": "id",
-											"dataType": "integer"
-										},
-										{
-											"name": "name",
-											"dataType": "string"
-										},
-										{
-											"name": "salary",
-											"dataType": "integer"
-										}
-									],
+									"schema": [],
 									"dslConnectorProperties": [
 										{
 											"name": "schemaName",
@@ -559,14 +546,6 @@
 										{
 											"name": "tableName",
 											"value": "emp"
-										},
-										{
-											"name": "allowSchemaDrift",
-											"value": false
-										},
-										{
-											"name": "inferDriftedColumnTypes",
-											"value": false
 										},
 										{
 											"name": "keys",
@@ -588,6 +567,14 @@
 										},
 										{
 											"name": "defaultToUpsert",
+											"value": true
+										},
+										{
+											"name": "allowSchemaDrift",
+											"value": true
+										},
+										{
+											"name": "inferDriftedColumnTypes",
 											"value": true
 										}
 									]
@@ -716,6 +703,7 @@
 					},
 					"mode": "Microbatch"
 				},
+				"status": "Stopped",
 				"allowVNetOverride": false
 			},
 			"dependsOn": []
