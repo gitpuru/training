@@ -7,20 +7,7 @@
 					{
 						"name": "cdc",
 						"properties": {
-							"schema": [
-								{
-									"name": "id",
-									"dataType": "short"
-								},
-								{
-									"name": "name",
-									"dataType": "string"
-								},
-								{
-									"name": "salary",
-									"dataType": "short"
-								}
-							],
+							"schema": [],
 							"dslConnectorProperties": [
 								{
 									"name": "container",
@@ -29,14 +16,6 @@
 								{
 									"name": "fileSystem",
 									"value": "cdc"
-								},
-								{
-									"name": "allowSchemaDrift",
-									"value": false
-								},
-								{
-									"name": "inferDriftedColumnTypes",
-									"value": false
 								}
 							]
 						}
@@ -160,7 +139,7 @@
 			{
 				"TargetEntities": [
 					{
-						"name": "dbo.emp",
+						"name": "dbo.emp_cdc",
 						"properties": {
 							"schema": [],
 							"dslConnectorProperties": [
@@ -170,37 +149,7 @@
 								},
 								{
 									"name": "tableName",
-									"value": "emp"
-								},
-								{
-									"name": "keys",
-									"value": [
-										"id"
-									]
-								},
-								{
-									"name": "deletable",
-									"value": true
-								},
-								{
-									"name": "updateable",
-									"value": true
-								},
-								{
-									"name": "upsertable",
-									"value": true
-								},
-								{
-									"name": "defaultToUpsert",
-									"value": true
-								},
-								{
-									"name": "allowSchemaDrift",
-									"value": true
-								},
-								{
-									"name": "inferDriftedColumnTypes",
-									"value": true
+									"value": "emp_cdc"
 								}
 							]
 						}
@@ -267,54 +216,14 @@
 				},
 				"DataMapperMappings": [
 					{
-						"targetEntityName": "dbo.emp",
+						"targetEntityName": "dbo.emp_cdc",
 						"sourceEntityName": "cdc",
 						"sourceConnectionReference": {
 							"connectionName": "ls_cdc_test_blob",
 							"type": "linkedservicetype"
 						},
 						"attributeMappingInfo": {
-							"attributeMappings": [
-								{
-									"name": "id",
-									"type": "Direct",
-									"functionName": "",
-									"attributeReference": {
-										"name": "id",
-										"entity": "cdc",
-										"entityConnectionReference": {
-											"connectionName": "ls_cdc_test_blob",
-											"type": "linkedservicetype"
-										}
-									}
-								},
-								{
-									"name": "name",
-									"type": "Direct",
-									"functionName": "",
-									"attributeReference": {
-										"name": "name",
-										"entity": "cdc",
-										"entityConnectionReference": {
-											"connectionName": "ls_cdc_test_blob",
-											"type": "linkedservicetype"
-										}
-									}
-								},
-								{
-									"name": "salary",
-									"type": "Direct",
-									"functionName": "",
-									"attributeReference": {
-										"name": "salary",
-										"entity": "cdc",
-										"entityConnectionReference": {
-											"connectionName": "ls_cdc_test_blob",
-											"type": "linkedservicetype"
-										}
-									}
-								}
-							]
+							"attributeMappings": []
 						}
 					}
 				],
@@ -328,7 +237,7 @@
 			},
 			"mode": "Microbatch"
 		},
-		"status": "Started",
+		"status": "Stopped",
 		"allowVNetOverride": false
 	}
 }
