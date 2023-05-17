@@ -136,7 +136,6 @@
 										"value": "@utcnow()",
 										"type": "Expression"
 									},
-									"wildcardFolderPath": "output",
 									"wildcardFileName": "*.csv",
 									"enablePartitionDiscovery": false
 								},
