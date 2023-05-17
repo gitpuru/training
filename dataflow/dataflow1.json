@@ -10,15 +10,48 @@
 						"type": "DatasetReference"
 					},
 					"name": "Emp"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_sql",
+						"type": "DatasetReference"
+					},
+					"name": "SQLemp"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_sqltables_copy",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "Isactive"
 				},
 				{
 					"name": "select1"
+				},
+				{
+					"name": "select2"
+				},
+				{
+					"name": "lookup1"
+				},
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "select3"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "alterRow1"
 				}
 			],
 			"scriptLines": [
@@ -30,6 +63,17 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> Emp",
+				"source(output(",
+				"          emp_key as integer,",
+				"          id as integer,",
+				"          name as string,",
+				"          city as string,",
+				"          is_active as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> SQLemp",
 				"Emp derive(Is_active = 1) ~> Isactive",
 				"Isactive select(mapColumn(",
 				"          id,",
@@ -38,7 +82,49 @@
 				"          Is_active",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"SQLemp select(mapColumn(",
+				"          SQL_emp_key = emp_key,",
+				"          SQL_id = id,",
+				"          SQL_name = name,",
+				"          SQL_city = city,",
+				"          SQL_is_active = is_active",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"Emp, select2 lookup(id == SQL_id,",
+				"     multiple: true,",
+				"     broadcast: 'auto')~> lookup1",
+				"lookup1 filter(!isNull(SQL_id)) ~> filter1",
+				"filter1 select(mapColumn(",
+				"          SQL_emp_key,",
+				"          SQL_id,",
+				"          SQL_name,",
+				"          SQL_city,",
+				"          SQL_is_active",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select3",
+				"select3 derive(SQL_is_active = 0) ~> derivedColumn1",
+				"derivedColumn1 alterRow(updateIf(1==1)) ~> alterRow1",
+				"alterRow1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:false,",
+				"     updateable:true,",
+				"     upsertable:false,",
+				"     keys:['emp_key'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          emp_key = SQL_emp_key,",
+				"          id = SQL_id,",
+				"          name = SQL_name,",
+				"          city = SQL_city,",
+				"          is_active = SQL_is_active",
+				"     )) ~> sink1"
 			]
 		}
 	}
