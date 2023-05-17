@@ -26,9 +26,6 @@
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
-				},
-				{
-					"name": "sink2"
 				}
 			],
 			"transformations": [
@@ -127,11 +124,7 @@
 				"          name = SQL_name,",
 				"          city = SQL_city,",
 				"          is_active = SQL_is_active",
-				"     )) ~> sink1",
-				"select1 sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink2"
+				"     )) ~> sink1"
 			]
 		}
 	}
