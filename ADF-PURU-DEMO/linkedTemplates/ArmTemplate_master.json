@@ -7,11 +7,6 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "ADF-PURU-DEMO"
 		},
-		"AzureSqlDatabase1_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'",
-			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=adf-sqlserver-demo.database.windows.net;Initial Catalog=ADF_SQLDB;User ID=admindemo"
-		},
 		"lsAzureBlobStorage_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'lsAzureBlobStorage'"
@@ -24,25 +19,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_blob_event_trigger'"
 		},
-		"ls_blobstorage_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ls_blobstorage'"
-		},
-		"ls_cdc_emp_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ls_cdc_emp'"
-		},
-		"ls_cdc_test_blob_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ls_cdc_test_blob'"
-		},
 		"ls_dmf_blob_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_dmf_blob'"
-		},
-		"ls_emp_demo_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ls_emp_demo'"
 		},
 		"ls_event_connectionString": {
 			"type": "secureString",
@@ -52,11 +31,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_json_blob'"
 		},
-		"ls_kv_demo_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ls_kv_demo'",
-			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=adf-sqlserver-demo.database.windows.net;Initial Catalog=ADF_SQLDB;User ID=admindemo"
-		},
 		"ls_sqldb_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_sqldb'"
@@ -65,31 +39,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_sqldb_copy'"
 		},
-		"ls_sqldb_kv_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ls_sqldb_kv'",
-			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=adf-sqlserver-demo.database.windows.net;Initial Catalog=ADF_SQLDB;User ID=admindemo"
-		},
-		"ls_sqldb_param_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ls_sqldb_param'",
-			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=adf-sqlserver-demo.database.windows.net;Initial Catalog=ADF_SQLDB;User ID=@{linkedService().user_name};Password=@{linkedService().password}"
-		},
 		"lshremp_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'lshremp'"
-		},
-		"AzureKeyVault1_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://kv-demo-it.vault.azure.net/"
-		},
-		"kv_sqldb_demo_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://kv-adf-demo1.vault.azure.net/"
-		},
-		"ls_kv_adf_demo_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://kv-demo-adf.vault.azure.net/"
 		},
 		"containerUri": {
 			"type": "string",
@@ -127,20 +79,8 @@
 					"ls_blob_event_trigger_connectionString": {
 						"value": "[parameters('ls_blob_event_trigger_connectionString')]"
 					},
-					"ls_blobstorage_connectionString": {
-						"value": "[parameters('ls_blobstorage_connectionString')]"
-					},
-					"ls_cdc_emp_connectionString": {
-						"value": "[parameters('ls_cdc_emp_connectionString')]"
-					},
-					"ls_cdc_test_blob_connectionString": {
-						"value": "[parameters('ls_cdc_test_blob_connectionString')]"
-					},
 					"ls_dmf_blob_connectionString": {
 						"value": "[parameters('ls_dmf_blob_connectionString')]"
-					},
-					"ls_emp_demo_connectionString": {
-						"value": "[parameters('ls_emp_demo_connectionString')]"
 					},
 					"ls_event_connectionString": {
 						"value": "[parameters('ls_event_connectionString')]"
@@ -154,17 +94,8 @@
 					"ls_sqldb_copy_connectionString": {
 						"value": "[parameters('ls_sqldb_copy_connectionString')]"
 					},
-					"ls_sqldb_param_connectionString": {
-						"value": "[parameters('ls_sqldb_param_connectionString')]"
-					},
-					"AzureKeyVault1_properties_typeProperties_baseUrl": {
-						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
-					},
-					"kv_sqldb_demo_properties_typeProperties_baseUrl": {
-						"value": "[parameters('kv_sqldb_demo_properties_typeProperties_baseUrl')]"
-					},
-					"ls_kv_adf_demo_properties_typeProperties_baseUrl": {
-						"value": "[parameters('ls_kv_adf_demo_properties_typeProperties_baseUrl')]"
+					"lshremp_connectionString": {
+						"value": "[parameters('lshremp_connectionString')]"
 					}
 				}
 			},
@@ -183,63 +114,11 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"lshremp_connectionString": {
-						"value": "[parameters('lshremp_connectionString')]"
 					}
 				}
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'ADF-PURU-DEMO_ArmTemplate_0')]"
-			]
-		},
-		{
-			"name": "ADF-PURU-DEMO_ArmTemplate_2",
-			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
-			"properties": {
-				"mode": "incremental",
-				"templateLink": {
-					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
-					"contentVersion": "1.0.0.0"
-				},
-				"parameters": {
-					"factoryName": {
-						"value": "[parameters('factoryName')]"
-					},
-					"AzureSqlDatabase1_connectionString": {
-						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
-					},
-					"ls_kv_demo_connectionString": {
-						"value": "[parameters('ls_kv_demo_connectionString')]"
-					},
-					"ls_sqldb_kv_connectionString": {
-						"value": "[parameters('ls_sqldb_kv_connectionString')]"
-					}
-				}
-			},
-			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'ADF-PURU-DEMO_ArmTemplate_1')]"
-			]
-		},
-		{
-			"name": "ADF-PURU-DEMO_ArmTemplate_3",
-			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
-			"properties": {
-				"mode": "incremental",
-				"templateLink": {
-					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
-					"contentVersion": "1.0.0.0"
-				},
-				"parameters": {
-					"factoryName": {
-						"value": "[parameters('factoryName')]"
-					}
-				}
-			},
-			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'ADF-PURU-DEMO_ArmTemplate_2')]"
 			]
 		}
 	]
