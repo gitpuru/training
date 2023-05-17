@@ -30,7 +30,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> Emp",
-				"Emp derive(Is_active = 0) ~> Isactive",
+				"Emp derive(Is_active = 1) ~> Isactive",
 				"Isactive select(mapColumn(",
 				"          id,",
 				"          name,",
