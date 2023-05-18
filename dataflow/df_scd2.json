@@ -1,0 +1,162 @@
+{
+	"name": "df_scd2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_emp_scd2",
+						"type": "DatasetReference"
+					},
+					"name": "Emp"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_sql",
+						"type": "DatasetReference"
+					},
+					"name": "SQLDBEmp"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_sql",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_sql",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DerColIsActive"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "select2"
+				},
+				{
+					"name": "LkpEmpid"
+				},
+				{
+					"name": "select3"
+				},
+				{
+					"name": "DerviedIsActive"
+				},
+				{
+					"name": "select4"
+				},
+				{
+					"name": "alterRow1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          id as short,",
+				"          name as string,",
+				"          city as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Emp",
+				"source(output(",
+				"          emp_key as integer,",
+				"          id as integer,",
+				"          name as string,",
+				"          city as string,",
+				"          is_active as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> SQLDBEmp",
+				"Emp derive(is_active = 1) ~> DerColIsActive",
+				"DerColIsActive select(mapColumn(",
+				"          id,",
+				"          name,",
+				"          city,",
+				"          is_active",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"SQLDBEmp select(mapColumn(",
+				"          SQL_emp_key = emp_key,",
+				"          SQL_id = id,",
+				"          SQL_name = name,",
+				"          SQL_city = city,",
+				"          SQL_is_active = is_active",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"Emp, select2 lookup(id == SQL_id,",
+				"     multiple: true,",
+				"     broadcast: 'auto')~> LkpEmpid",
+				"LkpEmpid select(mapColumn(",
+				"          SQL_emp_key,",
+				"          SQL_id,",
+				"          SQL_name,",
+				"          SQL_city",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select3",
+				"select3 derive(SQL_is_Active = 0) ~> DerviedIsActive",
+				"DerviedIsActive select(mapColumn(",
+				"          SQL_emp_key,",
+				"          SQL_id,",
+				"          SQL_name,",
+				"          SQL_city,",
+				"          SQL_is_Active",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select4",
+				"select4 alterRow(updateIf(1==1)) ~> alterRow1",
+				"alterRow1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          emp_key as integer,",
+				"          id as integer,",
+				"          name as string,",
+				"          city as string,",
+				"          is_active as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:false,",
+				"     updateable:true,",
+				"     upsertable:false,",
+				"     keys:['SQL_emp_key'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          emp_key as integer,",
+				"          id as integer,",
+				"          name as string,",
+				"          city as string,",
+				"          is_active as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink2"
+			]
+		}
+	}
+}

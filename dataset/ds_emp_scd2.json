@@ -1,0 +1,23 @@
+{
+	"name": "ds_emp_scd2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_json_blob",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "emp_data_scd2.csv",
+				"container": "demotraining"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
