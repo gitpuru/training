@@ -83,7 +83,7 @@
 				"          id,",
 				"          name,",
 				"          city,",
-				"          is_active = IsActive",
+				"          IsActive",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
@@ -154,7 +154,8 @@
 				"     mapColumn(",
 				"          id,",
 				"          name,",
-				"          city",
+				"          city,",
+				"          is_active = IsActive",
 				"     )) ~> sink2"
 			]
 		}
