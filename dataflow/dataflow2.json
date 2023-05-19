@@ -1,0 +1,100 @@
+{
+	"name": "dataflow2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_emp_scd2",
+						"type": "DatasetReference"
+					},
+					"name": "EmpCSV"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_sql",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "isActive"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "SQLselect"
+				},
+				{
+					"name": "LkpEmpid"
+				},
+				{
+					"name": "select2"
+				},
+				{
+					"name": "IsactiveSQL"
+				},
+				{
+					"name": "alterRow1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          id as short,",
+				"          name as string,",
+				"          city as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> EmpCSV",
+				"source(output(",
+				"          emp_key as integer,",
+				"          id as integer,",
+				"          name as string,",
+				"          city as string,",
+				"          is_active as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source2",
+				"EmpCSV derive(is_active = 1) ~> isActive",
+				"isActive select(mapColumn(",
+				"          id,",
+				"          name,",
+				"          city,",
+				"          is_active",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"source2 select(mapColumn(",
+				"          SQL_emp_key = emp_key,",
+				"          SQL_id = id,",
+				"          SQL_name = name,",
+				"          SQL_city = city,",
+				"          SQL_is_active = is_active",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> SQLselect",
+				"EmpCSV, SQLselect lookup(id == SQL_id,",
+				"     multiple: true,",
+				"     broadcast: 'auto')~> LkpEmpid",
+				"LkpEmpid select(mapColumn(",
+				"          SQL_emp_key,",
+				"          SQL_id,",
+				"          SQL_name,",
+				"          SQL_city",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"select2 derive(is_active = 0) ~> IsactiveSQL",
+				"IsactiveSQL alterRow(updateIf(0==0)) ~> alterRow1"
+			]
+		}
+	}
+}
