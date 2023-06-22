@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "ADF-PURU-DEMO"
 		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
 		"lsAzureBlobStorage_connectionString": {
 			"value": ""
 		},
