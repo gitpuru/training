@@ -1,0 +1,36 @@
+{
+	"name": "ds_emp_csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blob_training",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "emp_sample.csv",
+				"container": "input"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "1001",
+				"type": "String"
+			},
+			{
+				"name": "abc",
+				"type": "String"
+			},
+			{
+				"name": "1000",
+				"type": "String"
+			}
+		]
+	}
+}
