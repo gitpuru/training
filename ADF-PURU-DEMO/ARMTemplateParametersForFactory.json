@@ -11,10 +11,16 @@
 		"lsAzureBlobStorage_connectionString": {
 			"value": ""
 		},
+		"ls_blob_emp_connectionString": {
+			"value": ""
+		},
 		"ls_blob_event_connectionString": {
 			"value": ""
 		},
 		"ls_blob_event_trigger_connectionString": {
+			"value": ""
+		},
+		"ls_blob_training_connectionString": {
 			"value": ""
 		},
 		"ls_dmf_blob_connectionString": {

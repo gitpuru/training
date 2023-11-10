@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'lsAzureBlobStorage'"
 		},
+		"ls_blob_emp_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_blob_emp'"
+		},
 		"ls_blob_event_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_blob_event'"
@@ -22,6 +26,10 @@
 		"ls_blob_event_trigger_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_blob_event_trigger'"
+		},
+		"ls_blob_training_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_blob_training'"
 		},
 		"ls_dmf_blob_connectionString": {
 			"type": "secureString",
@@ -80,11 +88,17 @@
 					"lsAzureBlobStorage_connectionString": {
 						"value": "[parameters('lsAzureBlobStorage_connectionString')]"
 					},
+					"ls_blob_emp_connectionString": {
+						"value": "[parameters('ls_blob_emp_connectionString')]"
+					},
 					"ls_blob_event_connectionString": {
 						"value": "[parameters('ls_blob_event_connectionString')]"
 					},
 					"ls_blob_event_trigger_connectionString": {
 						"value": "[parameters('ls_blob_event_trigger_connectionString')]"
+					},
+					"ls_blob_training_connectionString": {
+						"value": "[parameters('ls_blob_training_connectionString')]"
 					},
 					"ls_dmf_blob_connectionString": {
 						"value": "[parameters('ls_dmf_blob_connectionString')]"
