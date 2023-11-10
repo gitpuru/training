@@ -99,6 +99,7 @@
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
+									"wildcardFileName": "emp_sa*.csv",
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -294,7 +295,6 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "emp_sample.csv",
 						"container": "input"
 					},
 					"columnDelimiter": ",",
