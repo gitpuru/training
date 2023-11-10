@@ -15,7 +15,19 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"value": "Copy emp data"
+					},
+					{
+						"name": "Source",
+						"value": "input//emp_sample.csv"
+					},
+					{
+						"name": "Destination",
+						"value": "output//emp_sample.csv"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "DelimitedTextSource",
@@ -42,6 +54,44 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "1001",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "abc",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "abc",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "1001",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "1000",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "1000",
+									"type": "String",
+									"physicalType": "String"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
