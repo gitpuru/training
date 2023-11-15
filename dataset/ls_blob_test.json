@@ -1,32 +1,31 @@
 {
-	"name": "ds_emp_csv",
+	"name": "ls_blob_test",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_blob_training",
+			"referenceName": "ls_blob_emp",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobStorageLocation"
+				"type": "AzureBlobStorageLocation",
+				"fileName": "emp_sample1.csv",
+				"container": "input"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
-			"firstRowAsHeader": true,
+			"firstRowAsHeader": false,
 			"quoteChar": "\""
 		},
 		"schema": [
 			{
-				"name": "1001",
 				"type": "String"
 			},
 			{
-				"name": "abc",
 				"type": "String"
 			},
 			{
-				"name": "1000",
 				"type": "String"
 			}
 		]

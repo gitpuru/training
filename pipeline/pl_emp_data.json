@@ -34,7 +34,7 @@
 						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
-							"fileListPath": "input/emp_sample1.csv",
+							"recursive": true,
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -102,7 +102,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_emp_csv",
+						"referenceName": "ls_blob_test",
 						"type": "DatasetReference"
 					}
 				],
