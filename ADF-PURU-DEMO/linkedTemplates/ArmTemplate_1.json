@@ -532,8 +532,8 @@
 						}
 					},
 					{
-						"name": "Wait1",
-						"type": "Wait",
+						"name": "Check for file avaialbility",
+						"type": "IfCondition",
 						"dependsOn": [
 							{
 								"activity": "Get Metadata1",
@@ -544,7 +544,32 @@
 						],
 						"userProperties": [],
 						"typeProperties": {
-							"waitTimeInSeconds": 10
+							"expression": {
+								"value": "@bool(activity('Get Metadata1').output.exists)",
+								"type": "Expression"
+							},
+							"ifFalseActivities": [
+								{
+									"name": "Wait20",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 20
+									}
+								}
+							],
+							"ifTrueActivities": [
+								{
+									"name": "Wait10",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 10
+									}
+								}
+							]
 						}
 					}
 				],
