@@ -19,6 +19,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_blob_emp'"
 		},
+		"ls_blob_emp_oracle_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_blob_emp_oracle'"
+		},
 		"ls_blob_event_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_blob_event'"
@@ -50,6 +54,10 @@
 		"ls_sqldb_copy_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_sqldb_copy'"
+		},
+		"ls_sqldb_ora_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_sqldb_ora'"
 		},
 		"lshremp_connectionString": {
 			"type": "secureString",
@@ -412,7 +420,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "emp_data.csv",
+						"fileName": "emp_sample.csv",
 						"container": "input"
 					},
 					"columnDelimiter": ",",
@@ -581,11 +589,6 @@
 				"type": "AzureSqlTable",
 				"schema": [
 					{
-						"name": "emp_key",
-						"type": "int",
-						"precision": 10
-					},
-					{
 						"name": "id",
 						"type": "int",
 						"precision": 10
@@ -595,17 +598,14 @@
 						"type": "varchar"
 					},
 					{
-						"name": "city",
-						"type": "varchar"
-					},
-					{
-						"name": "is_active",
-						"type": "varchar"
+						"name": "salary",
+						"type": "int",
+						"precision": 10
 					}
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "emp"
+					"table": "emp_ora"
 				}
 			},
 			"dependsOn": [
@@ -980,6 +980,19 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ls_blob_emp_oracle')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('ls_blob_emp_oracle_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ls_blob_event')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -1079,6 +1092,19 @@
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
 					"connectionString": "[parameters('ls_sqldb_copy_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_sqldb_ora')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('ls_sqldb_ora_connectionString')]"
 				}
 			},
 			"dependsOn": []
@@ -1351,11 +1377,9 @@
 						"alterRow1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     input(",
-						"          emp_key as integer,",
 						"          id as integer,",
 						"          name as string,",
-						"          city as string,",
-						"          is_active as string",
+						"          salary as integer",
 						"     ),",
 						"     deletable:false,",
 						"     insertable:false,",
@@ -1376,11 +1400,9 @@
 						"select1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     input(",
-						"          emp_key as integer,",
 						"          id as integer,",
 						"          name as string,",
-						"          city as string,",
-						"          is_active as string",
+						"          salary as integer",
 						"     ),",
 						"     deletable:false,",
 						"     insertable:true,",
@@ -1532,11 +1554,9 @@
 						"alterRow1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     input(",
-						"          emp_key as integer,",
 						"          id as integer,",
 						"          name as string,",
-						"          city as string,",
-						"          is_active as string",
+						"          salary as integer",
 						"     ),",
 						"     deletable:false,",
 						"     insertable:false,",
@@ -1557,11 +1577,9 @@
 						"select1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     input(",
-						"          emp_key as integer,",
 						"          id as integer,",
 						"          name as string,",
-						"          city as string,",
-						"          is_active as string",
+						"          salary as integer",
 						"     ),",
 						"     deletable:false,",
 						"     insertable:true,",
@@ -1576,6 +1594,122 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_emp_scd2')]",
+				"[concat(variables('factoryId'), '/datasets/ds_sql')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_sqldb')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "upsert",
+								"upsertSettings": {
+									"useTempDB": true,
+									"keys": [
+										"id"
+									]
+								},
+								"sqlWriterUseTableLock": false,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "1001",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "id",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "abc",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "name",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "1000",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "salary",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_emp_csv",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_sql",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_emp_csv')]",
 				"[concat(variables('factoryId'), '/datasets/ds_sql')]"
 			]
 		}

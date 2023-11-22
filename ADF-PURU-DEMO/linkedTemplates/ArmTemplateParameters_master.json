@@ -14,6 +14,9 @@
 		"ls_blob_emp_connectionString": {
 			"value": ""
 		},
+		"ls_blob_emp_oracle_connectionString": {
+			"value": ""
+		},
 		"ls_blob_event_connectionString": {
 			"value": ""
 		},
@@ -36,6 +39,9 @@
 			"value": ""
 		},
 		"ls_sqldb_copy_connectionString": {
+			"value": ""
+		},
+		"ls_sqldb_ora_connectionString": {
 			"value": ""
 		},
 		"lshremp_connectionString": {

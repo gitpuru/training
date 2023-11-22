@@ -19,6 +19,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_blob_emp'"
 		},
+		"ls_blob_emp_oracle_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_blob_emp_oracle'"
+		},
 		"ls_blob_event_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_blob_event'"
@@ -50,6 +54,10 @@
 		"ls_sqldb_copy_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_sqldb_copy'"
+		},
+		"ls_sqldb_ora_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_sqldb_ora'"
 		},
 		"lshremp_connectionString": {
 			"type": "secureString",
@@ -91,6 +99,9 @@
 					"ls_blob_emp_connectionString": {
 						"value": "[parameters('ls_blob_emp_connectionString')]"
 					},
+					"ls_blob_emp_oracle_connectionString": {
+						"value": "[parameters('ls_blob_emp_oracle_connectionString')]"
+					},
 					"ls_blob_event_connectionString": {
 						"value": "[parameters('ls_blob_event_connectionString')]"
 					},
@@ -114,6 +125,9 @@
 					},
 					"ls_sqldb_copy_connectionString": {
 						"value": "[parameters('ls_sqldb_copy_connectionString')]"
+					},
+					"ls_sqldb_ora_connectionString": {
+						"value": "[parameters('ls_sqldb_ora_connectionString')]"
 					},
 					"lshremp_connectionString": {
 						"value": "[parameters('lshremp_connectionString')]"
