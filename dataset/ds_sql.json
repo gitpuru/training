@@ -5,6 +5,14 @@
 			"referenceName": "ls_sqldb",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"schema_name": {
+				"type": "string"
+			},
+			"table_name": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [
@@ -24,8 +32,14 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "dbo",
-			"table": "emp_ora"
+			"schema": {
+				"value": "@dataset().schema_name",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().table_name",
+				"type": "Expression"
+			}
 		}
 	}
 }
