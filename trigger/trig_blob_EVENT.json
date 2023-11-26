@@ -1,0 +1,17 @@
+{
+	"name": "trig_blob_EVENT",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 15,
+				"startTime": "2023-11-26T02:15:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}
