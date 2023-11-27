@@ -130,6 +130,9 @@
 				}
 			}
 		],
-		"annotations": []
+		"annotations": [
+			"HR pipeline",
+			"Payroll"
+		]
 	}
 }

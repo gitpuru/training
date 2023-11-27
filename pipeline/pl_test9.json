@@ -1,0 +1,9 @@
+{
+	"name": "pl_test9",
+	"properties": {
+		"annotations": [
+			"HR pipeline",
+			"payroll"
+		]
+	}
+}
