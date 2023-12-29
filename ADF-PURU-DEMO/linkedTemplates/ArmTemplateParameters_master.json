@@ -47,6 +47,12 @@
 		"lshremp_connectionString": {
 			"value": ""
 		},
+		"ls_oracle_payroll_connectionString": {
+			"value": ""
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://kv-adf-demo1.vault.azure.net/"
+		},
 		"containerUri": {
 			"value": ""
 		},

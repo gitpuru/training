@@ -63,6 +63,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'lshremp'"
 		},
+		"ls_oracle_payroll_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_oracle_payroll'"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kv-adf-demo1.vault.azure.net/"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -131,6 +139,12 @@
 					},
 					"lshremp_connectionString": {
 						"value": "[parameters('lshremp_connectionString')]"
+					},
+					"ls_oracle_payroll_connectionString": {
+						"value": "[parameters('ls_oracle_payroll_connectionString')]"
+					},
+					"AzureKeyVault1_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
 					}
 				}
 			},
@@ -154,6 +168,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'ADF-PURU-DEMO_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "ADF-PURU-DEMO_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ADF-PURU-DEMO_ArmTemplate_1')]"
 			]
 		}
 	]
