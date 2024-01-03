@@ -1,0 +1,21 @@
+{
+	"name": "pl_master_emp",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute master Pipeline1",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_copy_emp_output",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": []
+	}
+}
