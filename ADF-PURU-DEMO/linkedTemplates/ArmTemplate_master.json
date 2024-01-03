@@ -47,6 +47,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_json_blob'"
 		},
+		"ls_oracle_payroll_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_oracle_payroll'"
+		},
 		"ls_sqldb_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_sqldb'"
@@ -62,10 +66,6 @@
 		"lshremp_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'lshremp'"
-		},
-		"ls_oracle_payroll_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ls_oracle_payroll'"
 		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"type": "string",
@@ -128,6 +128,9 @@
 					"ls_json_blob_connectionString": {
 						"value": "[parameters('ls_json_blob_connectionString')]"
 					},
+					"ls_oracle_payroll_connectionString": {
+						"value": "[parameters('ls_oracle_payroll_connectionString')]"
+					},
 					"ls_sqldb_connectionString": {
 						"value": "[parameters('ls_sqldb_connectionString')]"
 					},
@@ -139,9 +142,6 @@
 					},
 					"lshremp_connectionString": {
 						"value": "[parameters('lshremp_connectionString')]"
-					},
-					"ls_oracle_payroll_connectionString": {
-						"value": "[parameters('ls_oracle_payroll_connectionString')]"
 					},
 					"AzureKeyVault1_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"

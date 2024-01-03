@@ -35,6 +35,9 @@
 		"ls_json_blob_connectionString": {
 			"value": ""
 		},
+		"ls_oracle_payroll_connectionString": {
+			"value": ""
+		},
 		"ls_sqldb_connectionString": {
 			"value": ""
 		},
@@ -45,9 +48,6 @@
 			"value": ""
 		},
 		"lshremp_connectionString": {
-			"value": ""
-		},
-		"ls_oracle_payroll_connectionString": {
 			"value": ""
 		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
