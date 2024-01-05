@@ -52,7 +52,6 @@
 						"referenceName": "ds_param1",
 						"type": "DatasetReference",
 						"parameters": {
-							"container": "input",
 							"file_name": "xyz"
 						}
 					}
@@ -65,6 +64,14 @@
 				]
 			}
 		],
+		"parameters": {
+			"container_name": {
+				"type": "string"
+			},
+			"file_name": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
