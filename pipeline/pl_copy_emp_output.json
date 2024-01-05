@@ -109,10 +109,7 @@
 							"inputs": [
 								{
 									"referenceName": "ds_blob_csv",
-									"type": "DatasetReference",
-									"parameters": {
-										"container": "input"
-									}
+									"type": "DatasetReference"
 								}
 							],
 							"outputs": [
