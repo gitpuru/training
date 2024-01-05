@@ -52,7 +52,8 @@
 						"referenceName": "ds_param1",
 						"type": "DatasetReference",
 						"parameters": {
-							"container": "input"
+							"container": "input",
+							"file_name": "xyz"
 						}
 					}
 				],
