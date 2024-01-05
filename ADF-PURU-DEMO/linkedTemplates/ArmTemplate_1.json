@@ -163,6 +163,46 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ds_param')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"container": {
+						"type": "string"
+					},
+					"File_name": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().File_name",
+							"type": "Expression"
+						},
+						"container": {
+							"value": "@dataset().container",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_parquet_input')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -877,94 +917,6 @@
 				"[concat(variables('factoryId'), '/datasets/ls_blob_test')]",
 				"[concat(variables('factoryId'), '/datasets/target_emp_csv')]",
 				"[concat(variables('factoryId'), '/datasets/dset_sql_db')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pl_test')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Get Metadata1",
-						"type": "GetMetadata",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "ds_emp_csv",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"fieldList": [
-								"exists"
-							],
-							"storeSettings": {
-								"type": "AzureBlobStorageReadSettings",
-								"recursive": true,
-								"enablePartitionDiscovery": false
-							},
-							"formatSettings": {
-								"type": "DelimitedTextReadSettings"
-							}
-						}
-					},
-					{
-						"name": "Check for file avaialbility",
-						"type": "IfCondition",
-						"dependsOn": [
-							{
-								"activity": "Get Metadata1",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"expression": {
-								"value": "@bool(activity('Get Metadata1').output.exists)",
-								"type": "Expression"
-							},
-							"ifFalseActivities": [
-								{
-									"name": "Wait20",
-									"type": "Wait",
-									"dependsOn": [],
-									"userProperties": [],
-									"typeProperties": {
-										"waitTimeInSeconds": 20
-									}
-								}
-							],
-							"ifTrueActivities": [
-								{
-									"name": "Wait10",
-									"type": "Wait",
-									"dependsOn": [],
-									"userProperties": [],
-									"typeProperties": {
-										"waitTimeInSeconds": 10
-									}
-								}
-							]
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ds_emp_csv')]"
 			]
 		}
 	]
