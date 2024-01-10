@@ -1,0 +1,40 @@
+{
+	"name": "blob_csv_param",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azureblob_param",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"storagename": "trainingdemoit"
+			}
+		},
+		"parameters": {
+			"container": {
+				"type": "string"
+			},
+			"filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
+				"container": {
+					"value": "@dataset().container",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
