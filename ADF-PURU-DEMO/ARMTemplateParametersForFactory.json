@@ -50,6 +50,12 @@
 		"lshremp_connectionString": {
 			"value": ""
 		},
+		"Oracle1_connectionString": {
+			"value": "host=@{linkedService().host};port=@{linkedService().port};sid=@{linkedService().SID};user id=@{linkedService().username};Password=@{linkedService().password}"
+		},
+		"azureblob_param_connectionString": {
+			"value": ""
+		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"value": "https://kv-adf-demo1.vault.azure.net/"
 		}
