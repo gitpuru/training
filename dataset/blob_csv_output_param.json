@@ -9,7 +9,7 @@
 			"container_output": {
 				"type": "string"
 			},
-			"filename€_output": {
+			"filename_output": {
 				"type": "string"
 			}
 		},
@@ -19,7 +19,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": {
-					"value": "@dataset().filename€_output",
+					"value": "@dataset().filename_output",
 					"type": "Expression"
 				},
 				"container": {

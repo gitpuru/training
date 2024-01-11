@@ -72,7 +72,7 @@
 								"value": "@pipeline().parameters.container_output",
 								"type": "Expression"
 							},
-							"filename€_output": {
+							"filename_output": {
 								"value": "@pipeline().parameters.Filename_output",
 								"type": "Expression"
 							}
