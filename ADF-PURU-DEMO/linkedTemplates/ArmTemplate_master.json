@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
+		"azureblob_param_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'azureblob_param'"
+		},
 		"lsAzureBlobStorage_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'lsAzureBlobStorage'"
@@ -67,15 +71,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'lshremp'"
 		},
-		"Oracle1_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'Oracle1'",
-			"defaultValue": "host=@{linkedService().host};port=@{linkedService().port};sid=@{linkedService().SID};user id=@{linkedService().username};Password=@{linkedService().password}"
-		},
-		"azureblob_param_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'azureblob_param'"
-		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://kv-adf-demo1.vault.azure.net/"
@@ -109,6 +104,9 @@
 					},
 					"AzureBlobStorage1_connectionString": {
 						"value": "[parameters('AzureBlobStorage1_connectionString')]"
+					},
+					"azureblob_param_connectionString": {
+						"value": "[parameters('azureblob_param_connectionString')]"
 					},
 					"lsAzureBlobStorage_connectionString": {
 						"value": "[parameters('lsAzureBlobStorage_connectionString')]"
@@ -151,12 +149,6 @@
 					},
 					"lshremp_connectionString": {
 						"value": "[parameters('lshremp_connectionString')]"
-					},
-					"Oracle1_connectionString": {
-						"value": "[parameters('Oracle1_connectionString')]"
-					},
-					"azureblob_param_connectionString": {
-						"value": "[parameters('azureblob_param_connectionString')]"
 					},
 					"AzureKeyVault1_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"

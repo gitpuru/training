@@ -13,45 +13,44 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/blob_csv_param')]",
+			"name": "[concat(parameters('factoryName'), '/target_emp_csv')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "azureblob_param",
-					"type": "LinkedServiceReference",
-					"parameters": {
-						"storagename": "trainingdemoit"
-					}
-				},
-				"parameters": {
-					"container": {
-						"type": "string"
-					},
-					"filename": {
-						"type": "string"
-					}
+					"referenceName": "ls_blob_emp",
+					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": {
-							"value": "@dataset().filename",
-							"type": "Expression"
-						},
-						"container": {
-							"value": "@dataset().container",
-							"type": "Expression"
-						}
+						"container": "output"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
 				},
-				"schema": []
+				"schema": [
+					{
+						"name": "Name",
+						"type": "String"
+					},
+					{
+						"name": "Category",
+						"type": "String"
+					},
+					{
+						"name": "Status",
+						"type": "String"
+					},
+					{
+						"name": "Error",
+						"type": "String"
+					}
+				]
 			},
 			"dependsOn": []
 		},
@@ -337,6 +336,114 @@
 					"HR pipeline",
 					"Payroll"
 				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/target_emp_csv')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_emp_param')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "blob_csv_param",
+								"type": "DatasetReference",
+								"parameters": {
+									"container": {
+										"value": "@pipeline().parameters.container_input",
+										"type": "Expression"
+									},
+									"filename": {
+										"value": "@pipeline().parameters.Filename_input",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "blob_csv_output_param",
+								"type": "DatasetReference",
+								"parameters": {
+									"container_output": {
+										"value": "@pipeline().parameters.container_output",
+										"type": "Expression"
+									},
+									"filename_output": {
+										"value": "@pipeline().parameters.Filename_output",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"container_input": {
+						"type": "string"
+					},
+					"Filename_input": {
+						"type": "string"
+					},
+					"container_output": {
+						"type": "string"
+					},
+					"Filename_output": {
+						"type": "string"
+					}
+				},
+				"annotations": []
 			},
 			"dependsOn": []
 		},
