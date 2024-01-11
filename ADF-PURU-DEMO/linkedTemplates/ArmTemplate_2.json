@@ -426,8 +426,14 @@
 								"referenceName": "blob_csv_param",
 								"type": "DatasetReference",
 								"parameters": {
-									"container": "input",
-									"filename": "emp_sample.csv"
+									"container": {
+										"value": "@pipeline().parameters.container_input",
+										"type": "Expression"
+									},
+									"filename": {
+										"value": "@pipeline().parameters.Filename_input",
+										"type": "Expression"
+									}
 								}
 							}
 						],

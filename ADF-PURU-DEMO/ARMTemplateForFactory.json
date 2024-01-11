@@ -462,8 +462,14 @@
 								"referenceName": "blob_csv_param",
 								"type": "DatasetReference",
 								"parameters": {
-									"container": "input",
-									"filename": "emp_sample.csv"
+									"container": {
+										"value": "@pipeline().parameters.container_input",
+										"type": "Expression"
+									},
+									"filename": {
+										"value": "@pipeline().parameters.Filename_input",
+										"type": "Expression"
+									}
 								}
 							}
 						],
@@ -633,7 +639,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage1",
+					"referenceName": "ls_blob_emp",
 					"type": "LinkedServiceReference"
 				},
 				"parameters": {
@@ -666,7 +672,7 @@
 				"schema": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+				"[concat(variables('factoryId'), '/linkedServices/ls_blob_emp')]"
 			]
 		},
 		{
