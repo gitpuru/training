@@ -26,6 +26,9 @@
 		"ls_blob_event_trigger_connectionString": {
 			"value": ""
 		},
+		"ls_blob_param_connectionString": {
+			"value": ""
+		},
 		"ls_blob_training_connectionString": {
 			"value": ""
 		},

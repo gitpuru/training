@@ -35,6 +35,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_blob_event_trigger'"
 		},
+		"ls_blob_param_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_blob_param'"
+		},
 		"ls_blob_training_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_blob_training'"
@@ -122,6 +126,9 @@
 					},
 					"ls_blob_event_trigger_connectionString": {
 						"value": "[parameters('ls_blob_event_trigger_connectionString')]"
+					},
+					"ls_blob_param_connectionString": {
+						"value": "[parameters('ls_blob_param_connectionString')]"
 					},
 					"ls_blob_training_connectionString": {
 						"value": "[parameters('ls_blob_training_connectionString')]"
