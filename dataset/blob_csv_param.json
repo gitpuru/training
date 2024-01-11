@@ -2,7 +2,7 @@
 	"name": "blob_csv_param",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage1",
+			"referenceName": "ls_blob_param",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
