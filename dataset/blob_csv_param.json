@@ -2,11 +2,8 @@
 	"name": "blob_csv_param",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "azureblob_param",
-			"type": "LinkedServiceReference",
-			"parameters": {
-				"storagename": "trainingdemoit"
-			}
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
 		},
 		"parameters": {
 			"container": {
