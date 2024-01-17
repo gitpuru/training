@@ -63,6 +63,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_sqldb'"
 		},
+		"ls_sqldb1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_sqldb1'"
+		},
 		"ls_sqldb_copy_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_sqldb_copy'"
@@ -147,6 +151,9 @@
 					},
 					"ls_sqldb_connectionString": {
 						"value": "[parameters('ls_sqldb_connectionString')]"
+					},
+					"ls_sqldb1_connectionString": {
+						"value": "[parameters('ls_sqldb1_connectionString')]"
 					},
 					"ls_sqldb_copy_connectionString": {
 						"value": "[parameters('ls_sqldb_copy_connectionString')]"
