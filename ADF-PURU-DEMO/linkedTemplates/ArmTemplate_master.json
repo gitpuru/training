@@ -87,6 +87,10 @@
 			"type": "string",
 			"defaultValue": "https://dummy.restapiexample.com/api/v1/employees"
 		},
+		"RestService2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://dummy.restapiexample.com/api/v1/employees"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -191,6 +195,9 @@
 					},
 					"lshremp_connectionString": {
 						"value": "[parameters('lshremp_connectionString')]"
+					},
+					"RestService2_properties_typeProperties_url": {
+						"value": "[parameters('RestService2_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -216,6 +223,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'ADF-PURU-DEMO_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "ADF-PURU-DEMO_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ADF-PURU-DEMO_ArmTemplate_2')]"
 			]
 		}
 	]

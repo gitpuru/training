@@ -65,6 +65,9 @@
 		"RestService1_properties_typeProperties_url": {
 			"value": "https://dummy.restapiexample.com/api/v1/employees"
 		},
+		"RestService2_properties_typeProperties_url": {
+			"value": "https://dummy.restapiexample.com/api/v1/employees"
+		},
 		"containerUri": {
 			"value": ""
 		},
