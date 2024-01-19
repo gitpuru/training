@@ -165,9 +165,6 @@
 					"ls_sqldb_ora_connectionString": {
 						"value": "[parameters('ls_sqldb_ora_connectionString')]"
 					},
-					"lshremp_connectionString": {
-						"value": "[parameters('lshremp_connectionString')]"
-					},
 					"AzureKeyVault1_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
 					},
@@ -191,6 +188,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"lshremp_connectionString": {
+						"value": "[parameters('lshremp_connectionString')]"
 					}
 				}
 			},

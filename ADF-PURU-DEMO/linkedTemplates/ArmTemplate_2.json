@@ -13,6 +13,22 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/dset_sql_db')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_sqldb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/input_event')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -566,7 +582,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ls_blob_test')]",
-				"[concat(variables('factoryId'), '/datasets/target_emp_csv')]"
+				"[concat(variables('factoryId'), '/datasets/target_emp_csv')]",
+				"[concat(variables('factoryId'), '/datasets/dset_sql_db')]"
 			]
 		},
 		{
