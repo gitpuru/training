@@ -62,6 +62,9 @@
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"value": "https://kv-adf-demo1.vault.azure.net/"
 		},
+		"RestService1_properties_typeProperties_url": {
+			"value": "https://dummy.restapiexample.com/api/v1/employees"
+		},
 		"containerUri": {
 			"value": ""
 		},
