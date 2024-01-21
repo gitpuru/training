@@ -2,7 +2,7 @@
 	"name": "ds_blob_output",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "lsAzureBlobStorage",
+			"referenceName": "ls_blob_emp",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
@@ -15,10 +15,11 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"container": {
+				"folderPath": {
 					"value": "@dataset().container_name",
 					"type": "Expression"
-				}
+				},
+				"container": "output"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

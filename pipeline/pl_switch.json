@@ -278,7 +278,7 @@
 									"referenceName": "ds_blob_output",
 									"type": "DatasetReference",
 									"parameters": {
-										"container_name": "output"
+										"container_name": "default"
 									}
 								}
 							]
