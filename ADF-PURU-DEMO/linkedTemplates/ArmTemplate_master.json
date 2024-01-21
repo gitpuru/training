@@ -166,14 +166,14 @@
 					"ls_sqldb_copy_connectionString": {
 						"value": "[parameters('ls_sqldb_copy_connectionString')]"
 					},
-					"ls_sqldb_ora_connectionString": {
-						"value": "[parameters('ls_sqldb_ora_connectionString')]"
-					},
 					"AzureKeyVault1_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
 					},
 					"RestService1_properties_typeProperties_url": {
 						"value": "[parameters('RestService1_properties_typeProperties_url')]"
+					},
+					"RestService2_properties_typeProperties_url": {
+						"value": "[parameters('RestService2_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -193,11 +193,11 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"ls_sqldb_ora_connectionString": {
+						"value": "[parameters('ls_sqldb_ora_connectionString')]"
+					},
 					"lshremp_connectionString": {
 						"value": "[parameters('lshremp_connectionString')]"
-					},
-					"RestService2_properties_typeProperties_url": {
-						"value": "[parameters('RestService2_properties_typeProperties_url')]"
 					}
 				}
 			},
