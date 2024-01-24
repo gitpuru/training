@@ -896,7 +896,16 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "input//emp_json.json"
+							},
+							{
+								"name": "Destination",
+								"value": "dbo.emp_json"
+							}
+						],
 						"typeProperties": {
 							"source": {
 								"type": "JsonSource",
@@ -1020,7 +1029,9 @@
 						"type": "string"
 					}
 				},
-				"annotations": []
+				"annotations": [
+					"HR Pipeline"
+				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_emp_json')]",
@@ -2895,6 +2906,39 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/trig_event_created')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "pl_json",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"folderpath": "[parameters('trig_event_created_properties_pl_json_parameters_folderpath')]",
+							"filename": "[parameters('trig_event_created_properties_pl_json_parameters_filename')]"
+						}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/input/blobs/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('trig_event_created_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pl_json')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/trigger1')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -3396,39 +3440,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_emp_scd2')]",
 				"[concat(variables('factoryId'), '/datasets/ds_sql')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/trig_event_created')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "pl_json",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"folderpath": "[parameters('trig_event_created_properties_pl_json_parameters_folderpath')]",
-							"filename": "[parameters('trig_event_created_properties_pl_json_parameters_filename')]"
-						}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/input/blobs/",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('trig_event_created_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pl_json')]"
 			]
 		}
 	]

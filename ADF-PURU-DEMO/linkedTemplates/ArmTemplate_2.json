@@ -1103,7 +1103,16 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "input//emp_json.json"
+							},
+							{
+								"name": "Destination",
+								"value": "dbo.emp_json"
+							}
+						],
 						"typeProperties": {
 							"source": {
 								"type": "JsonSource",
@@ -1227,7 +1236,9 @@
 						"type": "string"
 					}
 				},
-				"annotations": []
+				"annotations": [
+					"HR Pipeline"
+				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_sql_json')]"
