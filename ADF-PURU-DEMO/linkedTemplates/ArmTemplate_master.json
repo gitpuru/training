@@ -91,6 +91,10 @@
 			"type": "string",
 			"defaultValue": "https://dummy.restapiexample.com/api/v1/employees"
 		},
+		"trig_event_created_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/8d3efd2d-0f51-4602-8ff1-e86fe93ed3b0/resourceGroups/Demo/providers/Microsoft.Storage/storageAccounts/trainingdemoit"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -238,6 +242,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"trig_event_created_properties_typeProperties_scope": {
+						"value": "[parameters('trig_event_created_properties_typeProperties_scope')]"
 					}
 				}
 			},
