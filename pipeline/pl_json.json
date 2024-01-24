@@ -141,6 +141,8 @@
 				"type": "string"
 			}
 		},
-		"annotations": []
+		"annotations": [
+			"HR Pipeline"
+		]
 	}
 }
