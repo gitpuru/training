@@ -68,6 +68,12 @@
 		"RestService2_properties_typeProperties_url": {
 			"value": "https://dummy.restapiexample.com/api/v1/employees"
 		},
+		"trig_event_created_properties_pl_json_parameters_folderpath": {
+			"value": "@triggerbody().folderPath"
+		},
+		"trig_event_created_properties_pl_json_parameters_filename": {
+			"value": "@triggerbody().fileName"
+		},
 		"trig_event_created_properties_typeProperties_scope": {
 			"value": "/subscriptions/8d3efd2d-0f51-4602-8ff1-e86fe93ed3b0/resourceGroups/Demo/providers/Microsoft.Storage/storageAccounts/trainingdemoit"
 		},

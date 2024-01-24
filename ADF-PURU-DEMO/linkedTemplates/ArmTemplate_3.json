@@ -7,6 +7,14 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "ADF-PURU-DEMO"
 		},
+		"trig_event_created_properties_pl_json_parameters_folderpath": {
+			"type": "string",
+			"defaultValue": "@triggerbody().folderPath"
+		},
+		"trig_event_created_properties_pl_json_parameters_filename": {
+			"type": "string",
+			"defaultValue": "@triggerbody().fileName"
+		},
 		"trig_event_created_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/8d3efd2d-0f51-4602-8ff1-e86fe93ed3b0/resourceGroups/Demo/providers/Microsoft.Storage/storageAccounts/trainingdemoit"
@@ -605,7 +613,10 @@
 							"referenceName": "pl_json",
 							"type": "PipelineReference"
 						},
-						"parameters": {}
+						"parameters": {
+							"folderpath": "[parameters('trig_event_created_properties_pl_json_parameters_folderpath')]",
+							"filename": "[parameters('trig_event_created_properties_pl_json_parameters_filename')]"
+						}
 					}
 				],
 				"type": "BlobEventsTrigger",
