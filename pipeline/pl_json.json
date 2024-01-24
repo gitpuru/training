@@ -13,7 +13,16 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "input//emp_json.json"
+					},
+					{
+						"name": "Destination",
+						"value": "dbo.emp_json"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "JsonSource",
