@@ -8,6 +8,10 @@
 				"pipelineReference": {
 					"referenceName": "pl_json",
 					"type": "PipelineReference"
+				},
+				"parameters": {
+					"folderpath": "@triggerbody().folderpath",
+					"filename": "@triggerbody().filename"
 				}
 			}
 		],
