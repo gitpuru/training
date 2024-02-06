@@ -32,6 +32,9 @@
 		"ls_blob_training_connectionString": {
 			"value": ""
 		},
+		"ls_blobstorage_training_connectionString": {
+			"value": ""
+		},
 		"ls_dmf_blob_connectionString": {
 			"value": ""
 		},

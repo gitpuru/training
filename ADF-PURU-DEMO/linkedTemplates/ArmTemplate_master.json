@@ -43,6 +43,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_blob_training'"
 		},
+		"ls_blobstorage_training_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_blobstorage_training'"
+		},
 		"ls_dmf_blob_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_dmf_blob'"
@@ -157,6 +161,9 @@
 					"ls_blob_training_connectionString": {
 						"value": "[parameters('ls_blob_training_connectionString')]"
 					},
+					"ls_blobstorage_training_connectionString": {
+						"value": "[parameters('ls_blobstorage_training_connectionString')]"
+					},
 					"ls_dmf_blob_connectionString": {
 						"value": "[parameters('ls_dmf_blob_connectionString')]"
 					},
@@ -174,9 +181,6 @@
 					},
 					"ls_sqldb1_connectionString": {
 						"value": "[parameters('ls_sqldb1_connectionString')]"
-					},
-					"ls_sqldb_copy_connectionString": {
-						"value": "[parameters('ls_sqldb_copy_connectionString')]"
 					},
 					"AzureKeyVault1_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
@@ -204,6 +208,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"ls_sqldb_copy_connectionString": {
+						"value": "[parameters('ls_sqldb_copy_connectionString')]"
 					},
 					"ls_sqldb_ora_connectionString": {
 						"value": "[parameters('ls_sqldb_ora_connectionString')]"
