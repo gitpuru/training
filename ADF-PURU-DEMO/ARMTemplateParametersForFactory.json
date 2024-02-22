@@ -53,6 +53,9 @@
 		"ls_sqldb1_connectionString": {
 			"value": ""
 		},
+		"ls_sqldb2_connectionString": {
+			"value": ""
+		},
 		"ls_sqldb_copy_connectionString": {
 			"value": ""
 		},

@@ -71,6 +71,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_sqldb1'"
 		},
+		"ls_sqldb2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_sqldb2'"
+		},
 		"ls_sqldb_copy_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_sqldb_copy'"
@@ -179,9 +183,6 @@
 					"ls_sqldb_connectionString": {
 						"value": "[parameters('ls_sqldb_connectionString')]"
 					},
-					"ls_sqldb1_connectionString": {
-						"value": "[parameters('ls_sqldb1_connectionString')]"
-					},
 					"AzureKeyVault1_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
 					},
@@ -208,6 +209,12 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"ls_sqldb1_connectionString": {
+						"value": "[parameters('ls_sqldb1_connectionString')]"
+					},
+					"ls_sqldb2_connectionString": {
+						"value": "[parameters('ls_sqldb2_connectionString')]"
 					},
 					"ls_sqldb_copy_connectionString": {
 						"value": "[parameters('ls_sqldb_copy_connectionString')]"
@@ -257,6 +264,26 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ADF-PURU-DEMO_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "ADF-PURU-DEMO_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"trig_event_created_properties_pl_json_parameters_folderpath": {
 						"value": "[parameters('trig_event_created_properties_pl_json_parameters_folderpath')]"
@@ -270,7 +297,7 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'ADF-PURU-DEMO_ArmTemplate_2')]"
+				"[resourceId('Microsoft.Resources/deployments', 'ADF-PURU-DEMO_ArmTemplate_3')]"
 			]
 		}
 	]
