@@ -26,10 +26,21 @@
 					"name": "dept"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_emp_output",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "EmpDept"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -65,7 +76,29 @@
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> EmpDept"
+				"     broadcast: 'auto')~> EmpDept",
+				"EmpDept select(mapColumn(",
+				"          Empid,",
+				"          Name = Empnew@Name,",
+				"          Salary,",
+				"          {Running avg(salary)},",
+				"          Deptno = Empnew@Deptno,",
+				"          bonus,",
+				"          country,",
+				"          Gender",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Category as string,",
+				"          Status as string,",
+				"          Error as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
